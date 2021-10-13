@@ -11,7 +11,8 @@ namespace OSCManager.Persistence.Core.Entities
         public string Domain { get; set; }
         public string Description { get; set; }
         public Uri Url { get; set; }
-        public bool IsMainRegistry { get; set; }
+        public bool IsMainRegistry { get; set; } = false;
+        public bool IsLinkRegistry { get; set; } = false;
 
         public string UrlString => Url.ToString();
     }

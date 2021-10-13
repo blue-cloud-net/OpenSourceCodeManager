@@ -17,8 +17,19 @@ namespace OSCManager.Persistence.Core.Entities
         public string DefaultBranche { get; set; }
         public DateTime LastUpdateTime { get; set; }
 
-        public SourceRepositoryRegistry Registry { get; set; }
+        public SourceRepository Repository { get; set; }
 
-        public string Url => new Uri(Registry.Url, Belong + "/" + Name).ToString();
+        public string Url => GetUrl();
+
+        public string GetUrl()
+        {
+            var dowloadRegistry = Repository.Registries.FirstOrDefault();
+            if (dowloadRegistry is not null)
+            {
+                return new Uri(dowloadRegistry.Url, Belong + "/" + Name).ToString();
+            }
+
+            return string.Empty;
+        }
     }
 }

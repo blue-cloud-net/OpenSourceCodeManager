@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
+using OSCManager.Abstractions.Options;
 using OSCManager.Persistence.Core;
 
 namespace OSCManager.Persistence.MySql
@@ -19,7 +21,7 @@ namespace OSCManager.Persistence.MySql
             {
                 var databaseOptions = provider.GetRequiredService<IOptionsSnapshot<DatabaseOptions>>();
 
-                options.UseMySql(databaseOptions.Value.ConnectionString);
+                options.UseMySQL(databaseOptions.Value.ConnectionString);
             });
         }
     }
