@@ -13,6 +13,7 @@ namespace OSCManager.Persistence.Core.Entities
         public string Name { get; set; }
 
         public Uri CreateUrl { get; set; }
+        public string ConnectType { get; set; }
         public string About { get; set; }
         public string DefaultBranche { get; set; }
         public DateTime LastUpdateTime { get; set; }
