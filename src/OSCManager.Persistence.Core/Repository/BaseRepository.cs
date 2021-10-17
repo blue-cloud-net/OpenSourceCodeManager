@@ -10,8 +10,9 @@ using AutoMapper;
 
 using Microsoft.EntityFrameworkCore;
 
-using OSCManager.Abstractions.Condition;
-using OSCManager.Persistence.Core.Entities;
+using OSCManager.Abstractions.Model;
+using OSCManager.Abstractions.Model.Entities;
+using OSCManager.Abstractions.Persistence;
 using OSCManager.Persistence.Core.Extensions;
 
 namespace OSCManager.Persistence.Core.Repository

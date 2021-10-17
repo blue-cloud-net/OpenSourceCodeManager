@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-using OSCManager.Abstractions.Options;
+using OSCManager.Abstractions.Model;
 using OSCManager.Persistence.Core;
 
 namespace OSCManager.Persistence.MySql

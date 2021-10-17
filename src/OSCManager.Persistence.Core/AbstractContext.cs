@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
 
-using OSCManager.Persistence.Core.Entities;
+using OSCManager.Abstractions.Model.Entities;
 
 namespace OSCManager.Persistence.Core
 {

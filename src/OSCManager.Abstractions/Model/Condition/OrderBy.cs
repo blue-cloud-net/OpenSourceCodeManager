@@ -7,7 +7,9 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OSCManager.Abstractions.Condition
+using OSCManager.Abstractions.Model.Entities;
+
+namespace OSCManager.Abstractions.Model
 {
     public class OrderByUnit<T> where T : IEntity
     {

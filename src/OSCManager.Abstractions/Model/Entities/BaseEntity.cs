@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using OSCManager.Abstractions;
 
-namespace OSCManager.Persistence.Core.Entities
+namespace OSCManager.Abstractions.Model.Entities
 {
     public abstract class BaseEntity : IEntity
     {

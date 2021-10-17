@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OSCManager.Abstractions.Options
+namespace OSCManager.Abstractions.Model
 {
     public class DatabaseOptions
     {

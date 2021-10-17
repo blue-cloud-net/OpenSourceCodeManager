@@ -1,13 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OSCManager.Abstractions
+namespace OSCManager.Cache
 {
-    public interface IEntity
+    interface ICacheService
     {
-        public string Id { get; set; }
     }
 }

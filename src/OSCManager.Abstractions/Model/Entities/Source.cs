@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OSCManager.Persistence.Core.Entities
+namespace OSCManager.Abstractions.Model.Entities
 {
     public class Source : BaseEntity
     {

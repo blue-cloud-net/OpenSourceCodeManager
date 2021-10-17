@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OSCManager.Persistence.Core.Extensions
+namespace OSCManager.Abstractions.Model.Entities
 {
-    public static class EntityExtensions
+    public interface IEntity
     {
-
-       
+        public string Id { get; set; }
     }
 }

@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-using OSCManager.Abstractions.Condition;
-using OSCManager.Persistence.Core.Entities;
+using OSCManager.Abstractions.Model;
+using OSCManager.Abstractions.Model.Entities;
 
-namespace OSCManager.Persistence.Core.Repository
+namespace OSCManager.Abstractions.Persistence
 {
-    public interface IRepository<T> where T : BaseEntity
+    public interface IRepository<T> where T : IEntity
     {
         Task SaveAsync(T entity, CancellationToken cancellationToken = default);
         Task AddAsync(T entity, CancellationToken cancellationToken = default);

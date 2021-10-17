@@ -36,9 +36,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AED4E8A3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OSCManager.VersionManager.Git.Test", "tests\OSCManager.VersionManager.Git.Test\OSCManager.VersionManager.Git.Test.csproj", "{4C8F4172-9985-486B-8A62-6BA3BF5E741C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSCManager.Web", "OSCManager.Web\OSCManager.Web.csproj", "{823EF7F3-524E-4AA7-A37A-50CCEBFD33DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OSCManager.Web", "src\OSCManager.Web\OSCManager.Web.csproj", "{823EF7F3-524E-4AA7-A37A-50CCEBFD33DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSCManager.Api", "OSCManager.Api\OSCManager.Api.csproj", "{A17705D5-4A67-46A9-A510-ED1B96A51F4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OSCManager.Api", "src\OSCManager.Api\OSCManager.Api.csproj", "{A17705D5-4A67-46A9-A510-ED1B96A51F4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
