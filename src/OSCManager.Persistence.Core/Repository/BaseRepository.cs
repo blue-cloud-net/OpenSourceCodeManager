@@ -128,7 +128,7 @@ namespace OSCManager.Persistence.Core.Repository
         {
             return await DoWork(async dbContext =>
             {
-                var dbSet = _dbContext.Set<T>();
+                var dbSet = dbContext.Set<T>();
                 var queryable = dbSet.Where(expression);
 
                 if (orderBy is not null)
@@ -149,11 +149,12 @@ namespace OSCManager.Persistence.Core.Repository
 
         public async Task<int> CountAsync(Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default)
         {
-
-            throw new NotImplementedException();
+            return await DoWork(async dbContext =>
+            {
+                var dbSet = dbContext.Set<T>();
+                return await dbSet.CountAsync(expression, cancellationToken);
+            }, cancellationToken);
         }
-
-
 
 
         protected async ValueTask DoWork(Func<DbContext, ValueTask> work, CancellationToken cancellationToken)
