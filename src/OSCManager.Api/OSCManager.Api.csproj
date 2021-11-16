@@ -1,10 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.2.1" />
     <!--<PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.2" />-->
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.2.1" />
@@ -12,5 +13,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OSCManager.Abstractions\OSCManager.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>
