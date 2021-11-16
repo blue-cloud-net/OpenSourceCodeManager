@@ -8,7 +8,7 @@ using OSCManager.Abstractions.Model.Entities;
 
 namespace OSCManager.Abstractions.Persistence
 {
-    public interface ISourceRepositoryRepository : IRepository<SourceRepository>
+    public interface ISourceHubRepository : IRepository<SourceHub>
     {
     }
 }

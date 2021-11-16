@@ -18,19 +18,15 @@ namespace OSCManager.Abstractions.Model.Entities
         public string DefaultBranche { get; set; }
         public DateTime LastUpdateTime { get; set; }
 
-        public SourceRepository Repository { get; set; }
+        public SourceHub Repository { get; set; }
 
         public string Url => GetUrl();
 
         public string GetUrl()
         {
             var dowloadRegistry = Repository.Registries.FirstOrDefault();
-            if (dowloadRegistry is not null)
-            {
-                return new Uri(dowloadRegistry.Url, Belong + "/" + Name).ToString();
-            }
 
-            return string.Empty;
+            return dowloadRegistry is not null ? new Uri(dowloadRegistry.Url, Belong + "/" + Name).ToString() : string.Empty;
         }
     }
 }

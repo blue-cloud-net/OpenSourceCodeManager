@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace OSCManager.Abstractions.Model.Entities
 {
-    public class SourceRepository : BaseEntity
+    public class SourceHub : BaseEntity
     {
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public ICollection<SourceRepositoryRegistry> Registries { get; set; }
+        public ICollection<SourceHubRegistry> Registries { get; set; }
     }
 }

@@ -18,29 +18,30 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace OSCManager.Api.Controllers
 {
     [ApiController]
+    [Route("[controller]/[action]")]
     public class SourceRepositoryController : Controller
     {
-        private readonly ISourceRepositoryRepository _sourceRepositoryRepository;
+        private readonly ISourceHubRepository _sourceRepositoryRepository;
 
-        public SourceRepositoryController(ISourceRepositoryRepository sourceRepositoryRepository)
+        public SourceRepositoryController(ISourceHubRepository sourceRepositoryRepository)
         {
             _sourceRepositoryRepository = sourceRepositoryRepository;
         }
 
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<SourceRepository>))]
-        [SwaggerOperation(
-            Summary = "Returns all available activities.",
-            Description = "Returns all available activities from which workflow definitions can be built.",
-            OperationId = "Activities.List",
-            Tags = new[] { "Activities" })
-        ]
+        //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<SourceRepository>))]
+        //[SwaggerOperation(
+        //    Summary = "Returns all available activities.",
+        //    Description = "Returns all available activities from which workflow definitions can be built.",
+        //    OperationId = "Activities.List",
+        //    Tags = new[] { "Activities" })
+        //]
         public async Task<IActionResult> List(
             [FromQuery] int? page = default,
             int? pageSize = default,
             CancellationToken cancellationToken = default)
         {
-            Expression<Func<SourceRepository, bool>> expression = (e) => true;
+            Expression<Func<SourceHub, bool>> expression = (e) => true;
 
             var totalCount = await _sourceRepositoryRepository.CountAsync(expression, cancellationToken);
             var paging = page == null || pageSize == null ? default : Paging.Page(page.Value, pageSize.Value);

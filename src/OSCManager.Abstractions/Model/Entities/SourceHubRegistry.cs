@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OSCManager.Abstractions.Model.Entities
 {
-    public class SourceRepositoryRegistry : BaseEntity
+    public class SourceHubRegistry : BaseEntity
     {
         public string Domain { get; set; }
         public string Description { get; set; }

@@ -1,19 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace OSCManager.Core
+namespace OSCManager.Api
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddOSCMCore(this IServiceCollection services)
+
+        public static IServiceCollection AddApiEndpoints(this IServiceCollection services)
         {
-            services.AddAutoMapper(Enumerable.Empty<Assembly>(), ServiceLifetime.Singleton);
+            services.AddControllers();
+            services.AddRouting(options => { options.LowercaseUrls = true; });
 
             return services;
         }

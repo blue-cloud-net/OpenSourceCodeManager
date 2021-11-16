@@ -55,7 +55,6 @@ namespace OSCManager.Persistence.Core.Repository
                         // Therefore using AutoMapper to copy properties instead.
                         existingEntity = _mapper.Map(entity, existingEntity);
                     }
-
                 }, cancellationToken);
             }
             catch (Exception ex)

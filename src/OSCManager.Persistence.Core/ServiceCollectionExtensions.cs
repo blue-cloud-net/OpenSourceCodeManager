@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
+using OSCManager.Abstractions.Persistence;
+using OSCManager.Persistence.Core.Repository;
+
 namespace OSCManager.Persistence.Core
 {
     public static class ServiceCollectionExtensions
@@ -34,8 +37,8 @@ namespace OSCManager.Persistence.Core
             services.AddDbContextPool<TDbContext>(configure);
 
             // TODO 注入DAL的Service
-            //services
-            //     .AddScoped<EntityFrameworkWorkflowDefinitionStore>()
+            services
+                 .AddScoped(typeof(ISourceHubRepository), typeof(SourceHubRepository));
             //     .AddScoped<EntityFrameworkWorkflowInstanceStore>()
             //     .AddScoped<EntityFrameworkWorkflowExecutionLogRecordStore>()
             //     .AddScoped<EntityFrameworkBookmarkStore>();

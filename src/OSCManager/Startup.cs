@@ -12,6 +12,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
+using OSCManager.Api;
+using OSCManager.Extensions;
+using OSCManager.Core;
+
 namespace OSCManager
 {
     public class Startup
@@ -32,6 +36,12 @@ namespace OSCManager
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "OSCManager", Version = "v1" });
             });
+
+            services.AddOSCMCore();
+
+            //services.AddApiEndpoints();
+
+            services.AddDatabase(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
