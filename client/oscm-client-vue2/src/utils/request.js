@@ -1,5 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 import store from '@/store';
+
+import { MessageBox, Message } from 'element-ui';
+import { getToken } from '@/utils/auth';
 
 // create an axios instance
 const service = axios.create({
@@ -58,8 +61,8 @@ service.interceptors.response.use(
           type: 'warning'
         }).then(() => {
           store.dispatch('user/resetToken').then(() => {
-            location.reload()
-          })
+            location.reload();
+          });
         });
       }
       return Promise.reject(new Error(res.message || 'Error'));
@@ -77,3 +80,5 @@ service.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export default service;
