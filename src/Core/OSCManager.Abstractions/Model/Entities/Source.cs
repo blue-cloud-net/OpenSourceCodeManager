@@ -1,32 +1,28 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OSCManager.Abstractions.Model.Entities
+namespace OSCManager.Abstractions.Model.Entities;
+
+public class Source : BaseEntity
 {
-    public class Source : BaseEntity
+    public string DisplayName { get; set; } = String.Empty;
+    public string Belong { get; set; } = String.Empty;
+    public string Name { get; set; } = String.Empty;
+
+    public Uri CreateUrl { get; set; } = default!;
+    public string ConnectType { get; set; } = String.Empty;
+    public string About { get; set; } = String.Empty;
+    public string DefaultBranche { get; set; } = String.Empty;
+    public DateTime LastUpdateTime { get; set; }
+
+    public SourceHub Repository { get; set; } = new SourceHub();
+
+    [NotMapped]
+    public string Url => this.GetUrl();
+
+    public string GetUrl()
     {
-        public string DisplayName { get; set; }
-        public string Belong { get; set; }
-        public string Name { get; set; }
+        var dowloadRegistry = this.Repository.Registries.FirstOrDefault();
 
-        public Uri CreateUrl { get; set; }
-        public string ConnectType { get; set; }
-        public string About { get; set; }
-        public string DefaultBranche { get; set; }
-        public DateTime LastUpdateTime { get; set; }
-
-        public SourceHub Repository { get; set; }
-
-        public string Url => GetUrl();
-
-        public string GetUrl()
-        {
-            var dowloadRegistry = Repository.Registries.FirstOrDefault();
-
-            return dowloadRegistry is not null ? new Uri(dowloadRegistry.Url, Belong + "/" + Name).ToString() : string.Empty;
-        }
+        return dowloadRegistry is not null ? new Uri(dowloadRegistry.Url, this.Belong + "/" + this.Name).ToString() : String.Empty;
     }
 }

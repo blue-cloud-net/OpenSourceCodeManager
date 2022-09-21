@@ -4,4 +4,12 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\BlueCloudNet.Web.ApiCommon\BlueCloudNet.Web.ApiCommon.csproj" />
+  </ItemGroup>
+
 </Project>

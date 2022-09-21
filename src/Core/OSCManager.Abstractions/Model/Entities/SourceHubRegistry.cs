@@ -1,19 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace OSCManager.Abstractions.Model.Entities;
 
-namespace OSCManager.Abstractions.Model.Entities
+public class SourceHubRegistry : BaseEntity
 {
-    public class SourceHubRegistry : BaseEntity
-    {
-        public string Domain { get; set; }
-        public string Description { get; set; }
-        public Uri Url { get; set; }
-        public bool IsMainRegistry { get; set; } = false;
-        public bool IsUseRegistry { get; set; } = false;
+    public string Domain { get; set; } = String.Empty;
+    public string Description { get; set; } = String.Empty;
+    public Uri Url { get; set; } = default!;
+    public bool IsMainRegistry { get; set; }
+    public bool IsUseRegistry { get; set; }
 
-        public string UrlString => Url.ToString();
-    }
+    public string UrlString => this.Url.ToString();
 }

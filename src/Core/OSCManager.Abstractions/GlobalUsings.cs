@@ -1,1 +1,1 @@
-//global using System;
+global using BlueCloudNet.Web.ApiCommon.Model;

@@ -1,18 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
-using AutoMapper;
-
-using Microsoft.EntityFrameworkCore;
-
-using OSCManager.Abstractions.Model;
-using OSCManager.Abstractions.Model.Entities;
-using OSCManager.Abstractions.Persistence;
 using OSCManager.Abstractions.Persistence.Condition;
 using OSCManager.Persistence.Core.Extensions;
 
@@ -22,14 +9,16 @@ public abstract class BaseRepository<T> : IRepository<T> where T : BaseEntity
 {
     private readonly DbContext _dbContext;
     private readonly IMapper _mapper;
+    private readonly ILogger _logger;
 
     // 解决并发的信号量锁
     private readonly SemaphoreSlim _semaphore = new(1);
 
-    public BaseRepository(DbContext context, IMapper mapper)
+    public BaseRepository(DbContext context, IMapper mapper, ILogger logger)
     {
         _dbContext = context;
         _mapper = mapper;
+        _logger = logger;
     }
 
     public async Task SaveAsync(T entity, CancellationToken cancellationToken = default)
@@ -60,6 +49,7 @@ public abstract class BaseRepository<T> : IRepository<T> where T : BaseEntity
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Save Failed!");
             throw;
         }
         finally
@@ -115,7 +105,7 @@ public abstract class BaseRepository<T> : IRepository<T> where T : BaseEntity
               await dbContext.Set<T>().Where(expression).BatchDeleteWithWorkAroundAsync(dbContext, cancellationToken), cancellationToken
          );
     }
-    public async Task<T> FindAsync(Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default)
+    public async Task<T?> FindAsync(Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default)
     {
         return await this.DoWork(async dbContext =>
         {
@@ -124,7 +114,7 @@ public abstract class BaseRepository<T> : IRepository<T> where T : BaseEntity
         }, cancellationToken);
     }
 
-    public async Task<IEnumerable<T>> FindManyAsync(Expression<Func<T, bool>> expression, OrderBy<T> orderBy = null, Paging paging = null, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<T>> FindManyAsync(Expression<Func<T, bool>> expression, OrderBy<T>? orderBy = null, Paging? paging = null, CancellationToken cancellationToken = default)
     {
         return await this.DoWork(async dbContext =>
         {

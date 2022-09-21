@@ -1,16 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace OSCManager.Abstractions.Model.Entities;
 
-namespace OSCManager.Abstractions.Model.Entities
+public class SourceHub : BaseEntity
 {
-    public class SourceHub : BaseEntity
-    {
-        public string Name { get; set; }
-        public string Description { get; set; }
+    public string Name { get; set; } = String.Empty;
+    public string Description { get; set; } = String.Empty;
 
-        public ICollection<SourceHubRegistry> Registries { get; set; }
-    }
+    public ICollection<SourceHubRegistry> Registries { get; set; } = new List<SourceHubRegistry>();
 }

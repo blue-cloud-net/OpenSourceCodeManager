@@ -1,31 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace OSCManager.Persistence.Core;
 
-using Microsoft.EntityFrameworkCore;
-
-using OSCManager.Abstractions.Model.Entities;
-
-namespace OSCManager.Persistence.Core
+public abstract class AbstractContext<TDbContext> : DbContext where TDbContext : DbContext
 {
-    public abstract class AbstractContext<TDbContext> : DbContext where TDbContext : DbContext
+    public const string Schema = "OSCM";
+
+    public const int DefaultMaxStringLength = 4000;
+
+    public AbstractContext(DbContextOptions<TDbContext> options)
+        : base(options)
+    { }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        public const string Schema = "OSCM";
-
-        public const int DefaultMaxStringLength = 4000;
-
-        public AbstractContext(DbContextOptions<TDbContext> options)
-            : base(options)
-        { }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        if (!String.IsNullOrWhiteSpace(Schema))
         {
-            if (!string.IsNullOrWhiteSpace(Schema))
-                modelBuilder.HasDefaultSchema(Schema);
-
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(BaseEntity).Assembly);
+            modelBuilder.HasDefaultSchema(Schema);
         }
+
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(BaseEntity).Assembly);
     }
 }
