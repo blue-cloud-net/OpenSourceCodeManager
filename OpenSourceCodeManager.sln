@@ -6,6 +6,8 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C97DB87D-B01D-472D-88E9-5348E972CB9A}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
 		Directory.Build.props = Directory.Build.props
 		Directory.Build.targets = Directory.Build.targets
 	EndProjectSection
@@ -54,7 +56,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OSCManager.Persistence.Mysq
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{20815E16-2C5A-4708-974E-D55634A21E18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueCloudNet.Web.ApiCommon", "src\Common\BlueCloudNet.Web.ApiCommon\BlueCloudNet.Web.ApiCommon.csproj", "{BF303DF4-2A54-4B16-AF7D-6094B99262CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlueCloudNet.Web.ApiCommon", "src\Common\BlueCloudNet.Web.ApiCommon\BlueCloudNet.Web.ApiCommon.csproj", "{BF303DF4-2A54-4B16-AF7D-6094B99262CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
