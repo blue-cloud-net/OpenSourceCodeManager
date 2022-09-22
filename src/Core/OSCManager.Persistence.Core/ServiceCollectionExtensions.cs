@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using OSCManager.Abstractions.Model;
@@ -21,6 +22,7 @@ public static class ServiceCollectionExtensions
     /// <param name="autoRunMigrations">If <c>true</c> then database migrations will be auto-executed on startup</param>
     /// <returns>The Elsa options builder, so calls may be chained</returns>
     public static IServiceCollection UseEntityFrameworkPersistence<TDbContext>(this IServiceCollection services,
+        IConfiguration configuration,
         Action<IServiceProvider, DbContextOptionsBuilder>? configure = null,
         bool autoRunMigrations = true)
         where TDbContext : DbContext
@@ -29,14 +31,16 @@ public static class ServiceCollectionExtensions
 
         services.AddDbContextPool<TDbContext>(configure);
 
-        //services.ConfigureOptions<DatabaseOptions>("");
+        services.AddSingleton<DatabaseOptions>(servicesProvider =>
+        {
+            var options = new DatabaseOptions();
+            configuration.Bind(DatabaseOptions.Position, options);
+            return options;
+        });
 
         // TODO 注入DAL的Service
         services
-             .AddScoped(typeof(ISourceHubRepository), typeof(SourceHubRepository));
-        //     .AddScoped<EntityFrameworkWorkflowInstanceStore>()
-        //     .AddScoped<EntityFrameworkWorkflowExecutionLogRecordStore>()
-        //     .AddScoped<EntityFrameworkBookmarkStore>();
+            .AddScoped(typeof(ISourceHubRepository), typeof(SourceHubRepository));
 
         return services;
     }

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 
 using OSCManager.Abstractions.Model;
 using OSCManager.Persistence.Core;
@@ -9,13 +9,13 @@ namespace OSCManager.Persistence.MySql;
 
 public static class MySqlDbExtensions
 {
-    public static IServiceCollection AddMySqlDatabase(this IServiceCollection services)
+    public static IServiceCollection AddMySqlDatabase(this IServiceCollection services, IConfiguration configuration)
     {
-        return services.UseEntityFrameworkPersistence<MySqlDbContext>((provider, options) =>
+        return services.UseEntityFrameworkPersistence<MySqlDbContext>(configuration, (provider, options) =>
         {
-            var databaseOptions = provider.GetRequiredService<IOptionsSnapshot<DatabaseOptions>>();
+            var databaseOptions = provider.GetRequiredService<DatabaseOptions>();
 
-            options.UseMySQL(databaseOptions.Value.ConnectionString);
+            options.UseMySQL(databaseOptions.ConnectionString);
         });
     }
 }

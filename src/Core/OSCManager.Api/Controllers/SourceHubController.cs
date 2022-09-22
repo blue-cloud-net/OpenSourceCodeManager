@@ -1,47 +1,60 @@
-using System;
-using System.Linq.Expressions;
-
 using Microsoft.AspNetCore.Mvc;
 
 using OSCManager.Abstractions.Model.Entities;
-using OSCManager.Abstractions.Persistence;
-using OSCManager.Abstractions.Persistence.Condition;
+using OSCManager.Abstractions.Services;
 
 namespace OSCManager.Api.Controllers;
 
 [ApiController]
-[Route("[controller]/[action]")]
+[Route("api/")]
 public class SourceHubController : ControllerBase
 {
-    private readonly ISourceHubRepository _sourceRepositoryRepository;
+    private readonly ISourceHubService _sourceHubService;
 
-    public SourceHubController(ISourceHubRepository sourceRepositoryRepository)
+    public SourceHubController(
+        ISourceHubService sourceHubService)
     {
-        _sourceRepositoryRepository = sourceRepositoryRepository;
+        _sourceHubService = sourceHubService;
+    }
+
+    [HttpPost]
+    [Route("[controller]")]
+    public Task<OperationalResult<SourceHub>> AddAsync(
+        [FromBody] SourceHub sourceHub)
+    {
+        return _sourceHubService.AddAsync(sourceHub, this.HttpContext.RequestAborted);
+    }
+
+    [HttpDelete]
+    [Route("[controller]/{id}")]
+    public Task<OperationalResult> DeleteAsync(
+        [FromRoute] string id)
+    {
+        return _sourceHubService.DeleteByIdAsync(id, this.HttpContext.RequestAborted);
+    }
+
+    [HttpPut]
+    [Route("[controller]")]
+    public Task<OperationalResult> UpdateAsync(
+        [FromBody] SourceHub sourceHub)
+    {
+        return _sourceHubService.UpdateAsync(sourceHub, this.HttpContext.RequestAborted);
     }
 
     [HttpGet]
-    //]
-    public async Task<IActionResult> PageAsync(
+    [Route("[controller]/{id}")]
+    public Task<OperationalResult<SourceHub>> GetAsync(
+        [FromRoute] string id)
+    {
+        return _sourceHubService.GetByIdAsync(id, this.HttpContext.RequestAborted);
+    }
+
+    [HttpGet]
+    [Route("[controller]")]
+    public Task<PageResult<SourceHub>> PageAsync(
         [FromQuery] int? pageIndex = default,
         int? pageSize = default)
     {
-        Expression<Func<SourceHub, bool>> expression = (e) => true;
-
-        var totalCount = await _sourceRepositoryRepository.CountAsync(expression, this.HttpContext.RequestAborted);
-        var paging = pageIndex == null || pageSize == null ? default : Paging.Page(pageIndex.Value, pageSize.Value);
-        var items = await _sourceRepositoryRepository.FindManyAsync(expression, paging: paging, cancellationToken: this.HttpContext.RequestAborted);
-
-        return this.Ok(items);
-    }
-
-    [HttpGet]
-    public async Task<IActionResult> TestAsync()
-    {
-        Console.WriteLine($"ActionStart:{Thread.CurrentThread.ManagedThreadId}");
-        await _sourceRepositoryRepository.TestAsync();
-        Console.WriteLine($"ActionEnd:{Thread.CurrentThread.ManagedThreadId}");
-
-        return this.Ok();
+        return _sourceHubService.GetPageAsync(new(), Paging.Page(pageIndex, pageSize), this.HttpContext.RequestAborted);
     }
 }

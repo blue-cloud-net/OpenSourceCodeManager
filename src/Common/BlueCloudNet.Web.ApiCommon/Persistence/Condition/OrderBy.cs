@@ -1,17 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 
-using OSCManager.Abstractions.Model.Entities;
+using BlueCloudNet.Web.ApiCommon.Model.Entities;
 
-namespace OSCManager.Abstractions.Persistence.Condition;
+namespace BlueCloudNet.Web.ApiCommon.Persistence.Condition;
 
 public class OrderByUnit<T> where T : IEntity
 {
     public OrderByUnit(Expression<Func<T, object>> expression, SortDirection sortDirection)
     {
-        OrderByExpression = expression;
-        SortDirection = sortDirection;
+        this.OrderByExpression = expression;
+        this.SortDirection = sortDirection;
     }
 
     public Expression<Func<T, object>> OrderByExpression { get; }
@@ -22,20 +20,20 @@ public class OrderBy<T> where T : IEntity
 {
     public OrderBy(Expression<Func<T, object>> expression, SortDirection sortDirection)
     {
-        Sorts.Add(new(expression, sortDirection));
+        this.Sorts.Add(new(expression, sortDirection));
     }
 
     public ICollection<OrderByUnit<T>> Sorts { get; set; } = new List<OrderByUnit<T>>(4);
 
     public OrderBy<T> OrderByAccording(Expression<Func<T, object>> expression)
     {
-        Sorts.Add(new(expression, SortDirection.Ascending));
+        this.Sorts.Add(new(expression, SortDirection.Ascending));
         return this;
     }
 
     public OrderBy<T> OrderByDescending(Expression<Func<T, object>> expression)
     {
-        Sorts.Add(new(expression, SortDirection.Descending));
+        this.Sorts.Add(new(expression, SortDirection.Descending));
         return this;
     }
 }

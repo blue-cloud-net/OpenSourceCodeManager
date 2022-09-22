@@ -1,8 +1,8 @@
-namespace OSCManager.Abstractions.Model.Entities;
+namespace BlueCloudNet.Web.ApiCommon.Model.Entities;
 
 public abstract class BaseEntity : IEntity
 {
-    public string Id { get; set; }
+    public string Id { get; set; } = String.Empty;
 
     public DateTime CreateTime { get; set; }
     public DateTime? ModifyTime { get; set; }

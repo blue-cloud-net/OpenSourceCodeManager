@@ -1,11 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
-
-using OSCManager.Abstractions.Model.Entities;
-using OSCManager.Abstractions.Persistence.Condition;
 
 namespace OSCManager.Abstractions.Persistence;
 
@@ -17,7 +10,7 @@ public interface IRepository<T> where T : IEntity
     Task UpdateAsync(T entity, CancellationToken cancellationToken = default);
     Task DeleteAsync(T entity, CancellationToken cancellationToken = default);
     Task<int> DeleteManyAsync(Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default);
-    Task<IEnumerable<T>> FindManyAsync(Expression<Func<T, bool>> expression, OrderBy<T>? orderBy = null, Paging? paging = null, CancellationToken cancellationToken = default);
+    Task<IEnumerable<T>> FindManyAsync(Expression<Func<T, bool>> expression, Paging? paging = null, OrderBy<T>? orderBy = null, CancellationToken cancellationToken = default);
     Task<int> CountAsync(Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default);
     Task<T?> FindAsync(Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default);
 }

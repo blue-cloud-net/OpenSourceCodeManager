@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace OSCManager.Abstractions.Model.Entities;
 
 public class Source : BaseEntity

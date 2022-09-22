@@ -1,6 +1,5 @@
 using System.Linq.Expressions;
 
-using OSCManager.Abstractions.Persistence.Condition;
 using OSCManager.Persistence.Core.Extensions;
 
 namespace OSCManager.Persistence.Core.Repository;
@@ -114,7 +113,7 @@ public abstract class BaseRepository<T> : IRepository<T> where T : BaseEntity
         }, cancellationToken);
     }
 
-    public async Task<IEnumerable<T>> FindManyAsync(Expression<Func<T, bool>> expression, OrderBy<T>? orderBy = null, Paging? paging = null, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<T>> FindManyAsync(Expression<Func<T, bool>> expression, Paging? paging = null, OrderBy<T>? orderBy = null, CancellationToken cancellationToken = default)
     {
         return await this.DoWork(async dbContext =>
         {
